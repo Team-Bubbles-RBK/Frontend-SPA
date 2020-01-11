@@ -41,8 +41,8 @@ class Login extends React.Component {
                             </h1>
                         </div>
                     </div>
-                    <div className="row mt-5">
-                        <div className="col-6 mx-auto">
+                    <div className="row my-5 ">
+                        <div className="col-10 mx-auto">
                             <Form noValidate validated={this.state.validated} onSubmit={this.handleSubmit}>
                                 <Form.Row>
                                     <Form.Group as={Col}>

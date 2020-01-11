@@ -7,10 +7,8 @@ import {
     Col,
     Form,
     FormGroup,
-    Label,
-    Input,
-    Button
-} from "reactstrap";
+    Button,
+} from "react-bootstrap";
 import "./login.css";
 import Link from "next/link";
 
@@ -49,11 +47,11 @@ class Login extends React.Component {
                 showAlert: true
             });
 
-            setTimeout(()=>{
+            setTimeout(() => {
                 this.setState({
                     showAlert: false
                 });
-            },5999);
+            }, 5999);
             // End of alert example
         } else {
             return (this.state.bool = true);
@@ -79,9 +77,9 @@ class Login extends React.Component {
                             <Col md="4" className="App my-auto ">
                                 <h2>Sign In</h2>
                                 <Form className="form">
-                                    <FormGroup>
-                                        <Label>Email</Label>
-                                        <Input
+                                    <Form.Group>
+                                        <Form.Label>Email</Form.Label>
+                                        <Form.Control
                                             type="email"
                                             name="email"
                                             id="exampleEmail"
@@ -90,10 +88,10 @@ class Login extends React.Component {
                                             onChange={e => this.handleChange(e)}
                                             required
                                         />
-                                    </FormGroup>
+                                    </Form.Group>
                                     <FormGroup>
-                                        <Label for="examplePassword">Password</Label>
-                                        <Input
+                                        <Form.Label for="examplePassword">Password</Form.Label>
+                                        <Form.Control
                                             type="password"
                                             name="password"
                                             id="examplePassword"
