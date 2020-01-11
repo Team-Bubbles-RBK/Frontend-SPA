@@ -6,6 +6,7 @@ module.exports = [
       lastName: "buzer",
       gender: "male",
       dateOfBirth: "6-sep-1998",
+      email: "hashem@gmail.com",
       password: "00000000",
       bubbles: [],
       prifilePic:
