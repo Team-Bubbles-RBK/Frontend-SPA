@@ -3,82 +3,72 @@ import Head from "next/head";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Footer from "../components/footer";
 import Link from "next/link";
-import Auth from "../layouts/Auth"
+import Layout from "../layouts/notAuth";
+import {Jumbotron, Button, Badge} from 'react-bootstrap';
+import '../public/style.css';
 
 const Home = () => (
-  <Auth>
-  <div>
-    <Head>
-      <title>BUBBLES</title>
-    </Head>
-    <div className="hero">
-      <h1 className="title">Welcome to BUBBLES</h1>
-      <p className="description">
-        <Link href="auth/login">
-          <code style={{ cursor: "pointer" }}>login</code>
-        </Link>
-        or
-        <Link href="auth/register">
-          <code style={{ cursor: "pointer" }}>signUp</code>
-        </Link>
-        to create your own Bubbles
-      </p>
-    </div>
-    <div id="aboutD">
-      <h1> About </h1>
-      <p>
-        It is a long established fact that a reader will be distracted by the
-        readable content of a page when looking at its layout. The point of
-        using Lorem Ipsum is that it has a more-or-less normal distribution of
-        letters, as opposed to using 'Content here, content here', making it
-        look like readable English. Many desktop publishing packages and web
-        page editors now use Lorem Ipsum as their default model text, and a
-        search for 'lorem ipsum' will uncover many web sites still in their
-        infancy. Various versions have evolved over the years, sometimes by
-        accident, sometimes on purpose (injected humour and the like).
-      </p>
-    </div>
-    <br />
-    <br />
-    <Footer />
-    <style jsx>
-      {`
-        #mainD {
-          background-image: url("https://data.whicdn.com/images/277013600/original.gif");
-          background-repeat: no-repeat;
-          width: 100%;
-          background-position: center;
-          background-size: cover;
-          height: 700px;
-        }
-        .hero {
-          width: 100%;
-          color: #333;
-        }
-        .title {
-          margin: 0;
-          width: 100%;
-          padding-top: 100px;
-          line-height: 1.15;
-          font-size: 48px;
-          color: white;
-        }
-        .title,
-        .description {
-          text-align: center;
-          color: white;
-        }
-        #aboutD {
-          text-align: center;
-          color: black;
-          margin-top: 600px;
-          margin-left: 10%;
-          margin-right: 10%;
-        }
+    <Layout>
+        <div>
+            <Head>
+                <title>Bubbles | Safe chatting environment</title>
+            </Head>
+            {/*<Jumbotron>*/}
+            {/*    <h1 className={'display-4'}>Welcome to Bubbles</h1>*/}
+            {/*    <p>*/}
+            {/*        This is a simple hero unit, a simple jumbotron-style component for calling*/}
+            {/*        extra attention to featured content or information.*/}
+            {/*    </p>*/}
+            {/*    <p>*/}
+            {/*        <Link href="auth/login">*/}
+            {/*            <Badge variant={"primary"} style={{cursor: "pointer"}}>Login </Badge>*/}
+            {/*        </Link>*/}
+            {/*        <span> or </span>*/}
+            {/*        <Link href="auth/register">*/}
+            {/*            <Badge variant="warning" style={{cursor: "pointer"}}>Sign Up </Badge>*/}
+            {/*        </Link>*/}
+            {/*        <span> to create your own <span className={"text-danger"}>Bubble</span>.</span>*/}
+            {/*    </p>*/}
+            {/*</Jumbotron>*/}
+            <div className="container-fluid home-main">
+                <h2 className={"display-3"}>Welcome to Bubbles <span className="blinker">॰°ₒ৹๐</span></h2>
+                <Link href="auth/register">
+                    <button type="button" className="btn btn-default">Sign Up</button>
+                </Link>
+                <Link href="auth/register">
+                    <button type="button" className="btn btn-outline-warning">Login</button>
+                </Link>
+                <div className="text-center mt-3">
+                    <p className={"text-white display-4"}>Create your own <span className={"text-info"}>Bubble</span>.
+                    </p>
+                </div>
+            </div>
+            <div className="container-fluid home-content1">
+                <div className="row">
+                    <div className="col-md-6 content1-left">
+                        <h3>Why to use Bubbles <span className="blinker">?</span></h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt ex inventore iure magni
+                            maxime necessitatibus possimus quibusdam quis repellendus sed tempore, vitae voluptas
+                            voluptatem. Aliquam autem earum expedita laboriosam nesciunt.</p>
+                    </div>
+                    <div className="col-md-6 content1-right">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci est impedit iure molestiae
+                            non placeat quam saepe ut veniam voluptatum. Alias cumque iure modi mollitia nostrum sint
+                            tempora, voluptas voluptate.</p>
+                    </div>
+                </div>
+            </div>
+            <div className="container-fluid home-content2">
+                <p><span>News</span> and <span>announcements</span> for all things <span>Bootstrap</span>, including
+                    new <span>releases</span> and <span>Bootstrap Themes</span>.</p>
+            </div>
+            <style jsx>
+                {`
+      
       `}
-    </style>
-  </div>
-  </Auth>
-);
+            </style>
+        </div>
+        < /Layout>
+            );
 
-export default Home;
+            export default Home;

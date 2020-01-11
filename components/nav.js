@@ -2,31 +2,31 @@ import React from "react";
 import Link from "next/link";
 
 const Nav = () => (
-  <nav>
-    <ul>
-      <li>
-        <Link href="/">
-          <a>Home</a>
-        </Link>
-      </li>
-      <li>
-        <Link href="auth/login">
-          <a>Login</a>
-        </Link>
-      </li>
-      <li>
-        <Link href="auth/register">
-          <a>register</a>
-        </Link>
-      </li>
-      <li>
-        <Link href="./chat">
-          <a>chatroom</a>
-        </Link>
-      </li>
-    </ul>
+    <nav>
+        <ul>
+            <li>
+                <Link href="/">
+                    <a>Home</a>
+                </Link>
+            </li>
+            <li>
+                <Link href="auth/login">
+                    <a>Login</a>
+                </Link>
+            </li>
+            <li>
+                <Link href="auth/register">
+                    <a>register</a>
+                </Link>
+            </li>
+            <li>
+                <Link href="./chat">
+                    <a>chatroom</a>
+                </Link>
+            </li>
+        </ul>
 
-    <style jsx>{`
+        <style jsx>{`
       :global(body) {
         margin: 0;
         font-family: -apple-system, BlinkMacSystemFont, Avenir Next, Avenir,
@@ -41,6 +41,7 @@ const Nav = () => (
       ul {
         display: flex;
         justify-content: flex-end;
+        margin:0;
       }
       li {
         display: flex;
@@ -52,7 +53,7 @@ const Nav = () => (
         color: orangered;
       }
     `}</style>
-  </nav>
+    </nav>
 );
 
 export default Nav;
