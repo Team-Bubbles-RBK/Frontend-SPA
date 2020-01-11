@@ -2,6 +2,7 @@ import React from "react";
 import Nav from "../../components/nav";
 import NotAuth from "../../layouts/notAuth";
 import $ from "jquery";
+import AlertDismissibleExample from '../../components/ui/Alert';
 
 import {
     Container,
@@ -61,6 +62,7 @@ class Login extends React.Component {
     render() {
         return (
             <div>
+                <AlertDismissibleExample heading={'Oh snap! You got an error!'} msg={'My message'} type={'primary'}/>
                 <NotAuth>
                     <Container>
                         <Row className="justify-content-md-center login">
