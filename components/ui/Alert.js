@@ -1,20 +1,13 @@
 import {useState, Component} from 'react';
-import {Alert} from "react-bootstrap";
+import {Alert, Fade} from "react-bootstrap";
 
 class AlertDismissibleExample extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            show: true
+            show: true,
+            pop: false
         };
-
-        // Auto-hide the alert after 5 seconds
-        setTimeout(() => {
-            this.setState({
-                show: false
-            });
-        }, 5000);
-
         this.displayHandler = this.displayHandler.bind(this);
     }
 
@@ -24,16 +17,24 @@ class AlertDismissibleExample extends Component {
         });
     }
 
+    componentDidMount() {
+        // Auto-hide the alert after 5 seconds
+        setTimeout(() => this.setState({show: false}), 5000);
+    }
+
     render() {
         const {msg, type, heading} = this.props;
         return (
-            this.state.show ? (
-                <Alert variant={type} onClose={() => this.displayHandler(false)} dismissible>
-                    <Alert.Heading>{heading}</Alert.Heading>
-                    <p>
-                        {msg}
-                    </p>
-                </Alert>) : ''
+            <Fade in={this.state.show}>
+                <div>
+                    <Alert transition={Fade} variant={type} onClose={() => this.displayHandler(false)} dismissible>
+                        <Alert.Heading>{heading}</Alert.Heading>
+                        <p>
+                            {msg}
+                        </p>
+                    </Alert>
+                </div>
+            </Fade>
         );
     }
 }
