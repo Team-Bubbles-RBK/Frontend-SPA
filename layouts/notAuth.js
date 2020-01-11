@@ -1,4 +1,4 @@
-//this layout is for the peaple that need to connet creat account or forget there password
+//this layout is for the people that need to connect create account or forget there password
 import Footer from "../components/footer";
 
 export default ({children}) => (

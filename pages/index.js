@@ -5,7 +5,6 @@ import Footer from "../components/footer";
 import Link from "next/link";
 import Layout from "../layouts/notAuth";
 import {Jumbotron, Button, Badge} from 'react-bootstrap';
-import '../public/style.css';
 
 const Home = () => (
     <Layout>
@@ -13,23 +12,6 @@ const Home = () => (
             <Head>
                 <title>Bubbles | Safe chatting environment</title>
             </Head>
-            {/*<Jumbotron>*/}
-            {/*    <h1 className={'display-4'}>Welcome to Bubbles</h1>*/}
-            {/*    <p>*/}
-            {/*        This is a simple hero unit, a simple jumbotron-style component for calling*/}
-            {/*        extra attention to featured content or information.*/}
-            {/*    </p>*/}
-            {/*    <p>*/}
-            {/*        <Link href="auth/login">*/}
-            {/*            <Badge variant={"primary"} style={{cursor: "pointer"}}>Login </Badge>*/}
-            {/*        </Link>*/}
-            {/*        <span> or </span>*/}
-            {/*        <Link href="auth/register">*/}
-            {/*            <Badge variant="warning" style={{cursor: "pointer"}}>Sign Up </Badge>*/}
-            {/*        </Link>*/}
-            {/*        <span> to create your own <span className={"text-danger"}>Bubble</span>.</span>*/}
-            {/*    </p>*/}
-            {/*</Jumbotron>*/}
             <div className="container-fluid home-main">
                 <h2 className={"display-3"}>Welcome to Bubbles <span className="blinker">॰°ₒ৹๐</span></h2>
                 <Link href="auth/register">
@@ -63,12 +45,10 @@ const Home = () => (
                     new <span>releases</span> and <span>Bootstrap Themes</span>.</p>
             </div>
             <style jsx>
-                {`
-      
-      `}
+                {``}
             </style>
         </div>
-        < /Layout>
-            );
+    </Layout>
+);
 
-            export default Home;
+export default Home;
