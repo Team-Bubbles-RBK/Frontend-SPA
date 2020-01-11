@@ -15,7 +15,6 @@ class Login extends React.Component {
             validated: false
         };
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleSubmit(event) {
@@ -78,7 +77,7 @@ class Login extends React.Component {
                                         <Form.Control
                                             required
                                             type="password"
-                                            min={"8"}
+                                            minLength={8}
                                         />
                                         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                                     </Form.Group>

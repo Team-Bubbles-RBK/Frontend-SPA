@@ -1,4 +1,3 @@
-import React from "react";
 import Link from "next/link";
 
 const Footer = () => (
@@ -34,6 +33,7 @@ const Footer = () => (
                     <ul className="nav-list">
                         <li><Link href="/"><a>Home</a></Link></li>
                         <li><Link href="/user/login"><a>Login</a></Link></li>
+                        <li><Link href="/user/register"><a>Sign Up</a></Link></li>
                     </ul>
                 </div>
             </div>

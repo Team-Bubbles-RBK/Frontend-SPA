@@ -12,7 +12,7 @@ import {
 import "./login.css";
 import Link from "next/link";
 
-class Login extends React.Component {
+class LoginOld extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -144,4 +144,4 @@ class Login extends React.Component {
     }
 }
 
-export default Login;
+export default LoginOld;
