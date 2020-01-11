@@ -21,7 +21,7 @@ const BubbleCard = () => (
     >
       bubble card page
     </h2>
-    <Container style={{ textAlign: "center" }}>
+    <Container > 
       <Row>
         {Data.map((elem, i) => {
           console.log(elem.user.id);

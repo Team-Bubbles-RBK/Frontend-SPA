@@ -20,17 +20,43 @@ class Chat extends React.Component{
           {name:"user 7"},
           {name:"user 8"},
         ],
+        seachArr:[],
         msgArr:["hi","hello","by","suck chat","welcome","bybyby","fuck you","hi","hello","by","suck chat","welcome","bybyby"],
         myArr:["hi","hello","by","suck chat","welcome","bybyby","fuck you","hi","hello","by","suck chat","welcome","bybyby"]
         
         
         
       }
+        this.filterList = this.filterList.bind(this)
+    }
+
+    componentWillMount(){
+      this.setState({
+        seachArr: this.state.usersArr
+      });
+    }
+    
+    filterList(e){
+      let updateList = this.state.usersArr;
+      
+      updateList = updateList.filter(item => {
+        return item.name.toLowerCase().search(
+          e.target.value.toLowerCase()
+          ) !== -1;
         
+      });
+      this.setState({
+        usersArr: updateList
+      });
+    }
+    componentWillUpdate(){
+      if(this.state.usersArr.length === 0 ){
+        this.setState({usersArr:this.state.seachArr})
+      }
     }
   
     render(){
-     
+      
       return(
         <Auth>
         <Container className="container justify-content-md-center " fluid={true}> 
@@ -39,9 +65,9 @@ class Chat extends React.Component{
             <Col className="col" sm="4" id="col">
               
               <UserInfo/>
-  
+        {/* this one for search */}
               <Col className="search mt-2">
-              <input class="form-control input-lg mt-2" id="inputlg" type="text" placeholder="search.... "/>
+              <input onChange={this.filterList} class="form-control input-lg mt-2"  type="text" placeholder="search.... "/>
               <Button variant="info"className="btn ml-2 mt-2 btn-lm" >search</Button>
               </Col>
   
