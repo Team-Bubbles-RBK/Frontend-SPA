@@ -7,6 +7,8 @@ import Footer from "../components/footer";
 import Data from "../dummyData.js";
 import Axios from "axios";
 import Link from "next/link";
+import CreateBubbleIcon from "../components/createBubbleIcon";
+import CreateBubble from "./createBubble";
 
 const BubbleCard = () => (
   <div>
@@ -14,6 +16,7 @@ const BubbleCard = () => (
       <title>bubbles Card</title>
     </Head>
     <Nav />
+    {/* <Link href="/createBubble"> */}
     <h2
       style={{
         textAlign: "center"
@@ -21,79 +24,59 @@ const BubbleCard = () => (
     >
       bubble card page
     </h2>
-    <Container style={{ textAlign: "center" }}>
-      <Row>
-        {Data.map((elem, i) => {
-          console.log(elem.user.id);
-          if (elem.user.id === "2") {
-            if (elem.user.bubbles.length > 1) {
-              return (
-                <Col lg="8" key={i}>
-                  <div
-                    style={{
-                      margin: "20px"
-                    }}
-                  >
-                    {elem.user.bubbles.map((bubble, i) => {
-                      return (
-                        <Link href="/chat" key={i}>
-                          <Card
-                            className="bubbleCard"
-                            style={{
-                              cursor: "pointer",
-                              border: "solid",
-                              borderRadius: "40%",
-                              marginBottom: "10%",
-                              paddingBottom: "70%",
-                              textAlign: "center",
-                              backgroundImage:
-                                "url(http://getwallpapers.com/wallpaper/full/0/e/7/476297.jpg)",
-                              color: "white",
-                              marginLeft: "30%"
-                            }}
-                          >
-                            {bubble.bubbleName}
-                          </Card>
-                        </Link>
-                      );
-                    })}
-                  </div>
-                </Col>
-              );
-            } else {
-              return (
-                <div
-                  id="bubblesCreation"
-                  style={{
-                    width: "70%",
-                    borderRadius: "40%",
-                    paddingBottom: "30%",
-                    textAlign: "center",
-                    backgroundColor: "red",
-                    color: "white"
-                  }}
-                >
-                  Create Your Own Bubble
-                  <form
-                    style={{
-                      textAlign: "center",
-                      marginTop: "30%",
-                      backgroundColor: "green"
-                    }}
-                  >
-                    <label>Bubble's Name:</label>
-                    <input></input>
-                    <br />
-                    <label>Add Members:</label>
-                    <button>generate link</button>
-                  </form>
-                </div>
-              );
-            }
-          }
-        })}
-      </Row>
-    </Container>
+    {Data.map((elem, i) => {
+      console.log(elem.user.id);
+      if (elem.user.id === "2") {
+        if (elem.user.bubbles.length > 1) {
+          return (
+            <div
+              style={{
+                padding: "3%",
+                display: "flex",
+                textAlign: "center",
+                backgroundColor: "#4d4957",
+                width: "90%",
+                height: "100%",
+                borderRadius: "30%",
+                marginLeft: "5%"
+              }}
+            >
+              <CreateBubbleIcon />
+              {elem.user.bubbles.map((bubble, i) => {
+                return (
+                  <Link href="/chat" key={i}>
+                    <Card
+                      className="bubbleCard"
+                      style={{
+                        padding: "5%",
+                        textAlign: "center",
+                        width: "50%",
+                        cursor: "pointer",
+                        border: "solid",
+                        borderRadius: "40%",
+                        marginTop: "10%",
+                        marginBottom: "10%",
+                        marginLeft: "3%",
+                        marginRight: "3%",
+                        paddingBottom: "20%",
+                        backgroundImage:
+                          "url(http://getwallpapers.com/wallpaper/full/0/e/7/476297.jpg)",
+                        color: "white"
+                        // marginLeft: "35%"
+                      }}
+                    >
+                      {bubble.bubbleName}
+                    </Card>
+                  </Link>
+                );
+              })}
+            </div>
+          );
+        } else {
+          return <CreateBubble />;
+        }
+      }
+    })}
     <Footer />
   </div>
 );
