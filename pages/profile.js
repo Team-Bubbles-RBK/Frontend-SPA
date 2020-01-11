@@ -25,8 +25,7 @@ class Profile extends React.Component {
       firstName: "",
       lastName: "",
       email: "",
-      password: "",
-      bool: false
+      password: ""
     };
     this.submit = this.submit.bind(this);
   }
@@ -46,27 +45,26 @@ class Profile extends React.Component {
     var password = this.state.password;
 
     if (
-      firstName.value === "" ||
-      lastName.value === "" ||
-      email.value === "" ||
-      password.value === "" ||
+      firstName === "" ||
+      lastName === "" ||
+      email === "" ||
+      password === "" ||
       !email.includes("@")
     ) {
       alert("Inputs must be filled out coorectly");
     } else {
       // Axios.post("/profile", (method = "POST"));
-      return (this.state.bool = true);
-    }
 
-    console.log("submit");
-    const form = {
-      firstName: this.state.firstName,
-      lastName: this.state.lastName,
-      email: this.state.email,
-      gender: this.state.gender,
-      password: this.state.password
-    };
-    console.log(form);
+      console.log("submit");
+      const form = {
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        email: this.state.email,
+        gender: this.state.gender,
+        password: this.state.password
+      };
+      console.log(form);
+    }
   }
   render() {
     return (
@@ -105,7 +103,7 @@ class Profile extends React.Component {
                             name="firstName"
                             id="firstName"
                             onChange={e => this.handleChange(e)}
-                            defaultValue={elem.user.firstName}
+                            placeholder={elem.user.firstName}
                           ></Input>
                           <br />
                         </td>
@@ -118,7 +116,7 @@ class Profile extends React.Component {
                             name="lastName"
                             id="lastName"
                             onChange={e => this.handleChange(e)}
-                            defaultValue={elem.user.lastName}
+                            placeholder={elem.user.lastName}
                           ></Input>
                           <br />
                         </td>
@@ -131,7 +129,7 @@ class Profile extends React.Component {
                             name="email"
                             id="email"
                             onChange={e => this.handleChange(e)}
-                            defaultValue={elem.user.email}
+                            placeholder={elem.user.email}
                           ></Input>
                           <br />
                         </td>
@@ -144,7 +142,7 @@ class Profile extends React.Component {
                             name="gender"
                             id="gender"
                             onChange={e => this.handleChange(e)}
-                            defaultValue={elem.user.gender}
+                            placeholder={elem.user.gender}
                           ></Input>
                           <br />
                         </td>
@@ -157,7 +155,7 @@ class Profile extends React.Component {
                             name="dob"
                             id="dob"
                             onChange={e => this.handleChange(e)}
-                            defaultValue={elem.user.dateOfBirth}
+                            placeholder={elem.user.dateOfBirth}
                           ></Input>
                           <br />
                         </td>
@@ -170,7 +168,7 @@ class Profile extends React.Component {
                             name="bubbles"
                             id="bubbles"
                             onChange={e => this.handleChange(e)}
-                            defaultValue={elem.user.bubbles.map((b, i) => {
+                            placeholder={elem.user.bubbles.map((b, i) => {
                               return b.bubbleName;
                             })}
                           ></Input>
