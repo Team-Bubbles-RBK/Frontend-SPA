@@ -11,10 +11,10 @@ const Home = () => (
             </Head>
             <div className="container-fluid home-main">
                 <h2 className={"display-3"}>Welcome to Bubbles <span className="blinker">॰°ₒ৹๐</span></h2>
-                <Link href="auth/register">
+                <Link href="user/register">
                     <button type="button" className="btn btn-default">Sign Up</button>
                 </Link>
-                <Link href="auth/register">
+                <Link href="user/login">
                     <button type="button" className="btn btn-outline-warning">Login</button>
                 </Link>
                 <div className="text-center mt-3">
