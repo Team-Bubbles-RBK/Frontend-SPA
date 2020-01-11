@@ -1,4 +1,4 @@
-import {useState, Component} from 'react';
+import {Component} from 'react';
 import {Alert, Fade} from "react-bootstrap";
 
 class AlertDismissibleExample extends Component {

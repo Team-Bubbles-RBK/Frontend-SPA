@@ -1,9 +1,6 @@
 import React from "react";
-import Nav from "../../components/nav";
 import NotAuth from "../../layouts/notAuth";
-import $ from "jquery";
 import AlertDismissibleExample from '../../components/ui/Alert';
-
 import {
     Container,
     Row,
@@ -23,7 +20,8 @@ class Login extends React.Component {
         this.state = {
             email: "",
             password: "",
-            bool: false
+            bool: false,
+            showAlert: false,
         };
         this.submit = this.submit.bind(this);
     }
@@ -46,7 +44,10 @@ class Login extends React.Component {
             !email.includes("@") ||
             password.length < 6
         ) {
-            // alert("Inputs must be filled out correctly");
+            // Show alert component @example
+            this.setState({
+                showAlert: true
+            })
         } else {
             return (this.state.bool = true);
         }
@@ -62,8 +63,10 @@ class Login extends React.Component {
     render() {
         return (
             <div>
-                <AlertDismissibleExample heading={'Oh snap! You got an error!'} msg={'My message'} type={'primary'}/>
                 <NotAuth>
+                    {this.state.showAlert ?
+                        <AlertDismissibleExample heading={'Invalid input'} msg={'Inputs must be filled out correctly'}
+                                                 type={'danger'}/> : ''}
                     <Container>
                         <Row className="justify-content-md-center login">
                             <Col md="4" className="App my-auto ">
