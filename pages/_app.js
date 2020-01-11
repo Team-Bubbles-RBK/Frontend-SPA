@@ -18,7 +18,7 @@ export default class MyApp extends App {
     render() {
         const {Component, pageProps, router} = this.props;
         return (
-            <Container>
+            <section>
                 <PageTransition timeout={300} classNames="page-transition">
                     <Component {...pageProps} key={router.route}/>
                 </PageTransition>
@@ -39,7 +39,7 @@ export default class MyApp extends App {
           }
         `}
                 </style>
-            </Container>
+            </section>
         );
     }
 }
