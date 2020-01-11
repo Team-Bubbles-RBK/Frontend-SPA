@@ -47,7 +47,14 @@ class Login extends React.Component {
             // Show alert component @example
             this.setState({
                 showAlert: true
-            })
+            });
+
+            setTimeout(()=>{
+                this.setState({
+                    showAlert: false
+                });
+            },5999);
+            // End of alert example
         } else {
             return (this.state.bool = true);
         }

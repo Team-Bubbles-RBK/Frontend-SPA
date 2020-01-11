@@ -25,7 +25,7 @@ class AlertDismissibleExample extends Component {
         const {msg, type, heading} = this.props;
         return (
             <Fade in={this.state.show}>
-                <div>
+                <div className={"absolute-top"}>
                     <Alert transition={Fade} variant={type} onClose={() => this.displayHandler(false)} dismissible>
                         <Alert.Heading>{heading}</Alert.Heading>
                         <p>
