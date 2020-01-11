@@ -1,10 +1,7 @@
 import React from "react";
 import Head from "next/head";
-import "bootstrap/dist/css/bootstrap.min.css";
-import Footer from "../components/footer";
 import Link from "next/link";
 import Layout from "../layouts/notAuth";
-import {Jumbotron, Button, Badge} from 'react-bootstrap';
 
 const Home = () => (
     <Layout>
