@@ -1,6 +1,6 @@
 //this one for the users bubble
 import React from "react"
-import {Col} from 'reactstrap';
+import {Col} from 'react-bootstrap';
 import "./sideBubbel.css"
 
 

@@ -1,16 +1,29 @@
-import App, {Container} from 'next/app'
+import App from 'next/app'
 import React from 'react'
 import {PageTransition} from 'next-page-transitions'
 import '../public/style.css'; // Global CSS for App
 import "bootstrap/dist/css/bootstrap.min.css";
+import {HttpRequest} from "../helpers/http.helper";
+import Router from 'next/router';
 
 export default class MyApp extends App {
     static async getInitialProps({Component, router, ctx}) {
+
         let pageProps = {};
 
         if (Component.getInitialProps) {
             pageProps = await Component.getInitialProps(ctx);
         }
+
+        // Validate if user have a valid token
+        let token = typeof window === 'undefined' ? '' : localStorage.getItem('token');
+        HttpRequest('POST', '/users/check', {token})
+            .then(({data}) => {
+                // User is authenticated and there are no problems
+            })
+            .catch(err => {
+                Router.push('/user/login');
+            });
 
         return {pageProps}
     }

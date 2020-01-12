@@ -1,5 +1,5 @@
 import React from "react";
-import { Col } from "reactstrap";
+import { Col } from "react-bootstrap";
 import createBubble from "../pages/createBubble";
 import Link from "next/link";
 
