@@ -7,6 +7,7 @@ import Auth from "../layouts/Auth";
 
 
 
+
 class Profile extends React.Component {
   constructor(props) {
     super(props);

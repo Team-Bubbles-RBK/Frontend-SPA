@@ -2,6 +2,7 @@ import React from 'react';
 import Chart from 'chart.js';
 import { Polar } from 'react-chartjs-2';
 import axios from 'axios';
+import HttpRequest from '../helpers/http.helper'
 
 
 
@@ -40,6 +41,7 @@ class PolarArea extends React.Component {
 
 
   update = () => {
+    // return HttpRequest('POST')
     return axios({
       method: 'POST',
       url: 'http://localhost:1234/getStatus',
