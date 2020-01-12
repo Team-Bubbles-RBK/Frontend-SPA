@@ -4,31 +4,13 @@ import Auth from "../layouts/Auth";
 import Head from "next/head";
 import {HttpRequest} from "../helpers/http.helper";
 import Router from "next/router";
-
+import io from 'socket.io-client';
+import {BubbleRight} from '../components/chat/bubble.right';
+import {BubbleLeft} from '../components/chat/bubble.left';
 class Chat extends React.Component {
     constructor(props) {
         super(props);
     }
-
-    // componentDidMount() {
-    //     // Validate if user have a valid token
-    //     let token = typeof window === 'undefined' ? '' : localStorage.getItem('token');
-    //     HttpRequest('POST', '/users/check', {token})
-    //         .then(({data}) => {
-    //             // User is authenticated and there are no problems
-    //             // this.setState({
-    //             //     loggedIn: true
-    //             // });
-    //             console.log(data)
-    //         })
-    //         .catch(err => {
-    //             // this.setState({
-    //             //     loggedIn: false
-    //             // });
-    //             console.log({err});
-    //             Router.push('/user/login');
-    //         });
-    // }
 
     render() {
         return (
@@ -143,56 +125,9 @@ class Chat extends React.Component {
                                     </div>
                                 </div>
                                 <div className="chat-panel">
-                                    <div className="row no-gutters">
-                                        <div className="col-md-3">
-                                            <div className="chat-bubble chat-bubble--left">
-                                                Hello dude!
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="row no-gutters">
-                                        <div className="col-md-3 offset-md-9">
-                                            <div className="chat-bubble chat-bubble--right">
-                                                Hello dude!
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="row no-gutters">
-                                        <div className="col-md-3 offset-md-9">
-                                            <div className="chat-bubble chat-bubble--right">
-                                                Hello dude!
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="row no-gutters">
-                                        <div className="col-md-3">
-                                            <div className="chat-bubble chat-bubble--left">
-                                                Hello dude!
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="row no-gutters">
-                                        <div className="col-md-3">
-                                            <div className="chat-bubble chat-bubble--left">
-                                                Hello dude!
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="row no-gutters">
-                                        <div className="col-md-3">
-                                            <div className="chat-bubble chat-bubble--left">
-                                                Hello dude!
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="row no-gutters">
-                                        <div className="col-md-3 offset-md-9">
-                                            <div className="chat-bubble chat-bubble--right">
-                                                Hello dude!
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="row no-gutters">
+                                    <BubbleRight text={'lorem'}/>
+                                    <BubbleLeft text={'lorem'}/>
+                                    <div className="row no-gutters chat-box-tray-wrapper">
                                         <div className="col-12">
                                             <div className="chat-box-tray">
                                                 <i className="material-icons">sentiment_very_satisfied</i>
