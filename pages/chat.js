@@ -12,20 +12,52 @@ class Chat extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            bubbleId: 2,
             messages: [],
-            usermessages: [],
+            userMessages: [],
         };
         this.sendMessage = this.sendMessage.bind(this);
+    }
+
+    componentDidMount() {
+        this.socket = io('http://localhost:3000');
+        this.socket.emit('join', this.state.bubbleId);
+        this.socket.on('message', (message) => {
+            console.log(JSON.stringify(message));
+            // let messages =
+            // this.setState({
+            //
+            // })
+        });
     }
 
     sendMessage(e) {
         e.preventDefault();
         const form = e.target;
         // Get the data from the form
-        const data = Object.fromEntries(new FormData(form));
+        const {message} = Object.fromEntries(new FormData(form));
         // reset the input field
         e.target.children[0].value = '';
-        console.log('submit', data);
+        console.log('submit', message);
+
+        let data = {
+            content: message,
+            bubble_id: this.state.bubbleId,
+        };
+
+        HttpRequest('POST', '/messages/store', data)
+            .then(({data}) => {
+                let _messages = this.state.messages.map((msg) => msg);
+                _messages.push(message);
+                
+                this.setState({
+                    messages: _messages
+                });
+                console.log({data})
+            })
+            .catch(err => {
+                console.error({err})
+            })
     }
 
     render() {
@@ -141,7 +173,11 @@ class Chat extends React.Component {
                                     </div>
                                 </div>
                                 <div className="chat-panel">
-                                    <BubbleRight text={'lorem'}/>
+                                    {
+                                        this.state.messages.map((msg, i) => {
+                                            return <BubbleRight text={msg} key={i}/>;
+                                        })
+                                    }
                                     <BubbleLeft text={'lorem'}/>
                                     <div className="row no-gutters chat-box-tray-wrapper">
                                         <div className="col-12">
