@@ -1,21 +1,20 @@
 import React from 'react';
 import Chart from 'chart.js';
 import { Polar } from 'react-chartjs-2';
-import axios from 'axios';
-import HttpRequest from '../helpers/http.helper'
+import HttpRequest2 from '../helpers/httpHelperForSentiments'
 
 
 
 class PolarArea extends React.Component {
   constructor(props) {
     super(props);
-    this.chartInstance = undefined;
+    this.defaultState =  [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55];
     this.state = {
         data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            labels: ["Excited”, “Cheerful”, “Good”, “Satisfied”, “Tender”, “Neutral”, “Dissatisfied”, “Unhappy”, “Distressed”,”Sorrowful”, “Hurt" ],
             datasets: [{
-                label: '# of Votes',
-                data: [21, 13, 8, 5, 3, 1],
+                label: 'Emotional State',
+                data: this.defaultState,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
@@ -41,23 +40,28 @@ class PolarArea extends React.Component {
 
 
   update = () => {
-    // return HttpRequest('POST')
-    return axios({
-      method: 'POST',
-      url: 'http://localhost:1234/getStatus',
-      data: {
-        id : this.state.id
-      }
-    });
+    return HttpRequest('POST', "/getStatus", {})
   }
 
   componentDidMount() {
-    // this.update().then((results) => {
+    this.update().then((results) => {
+
+      let obj = {};
+
+
+      ["-5","-4","-3","-2","-1", "0","1","2", "3", "4", "5"].forEach((val) => {
+        if (!results[0][val]) {
+          results[0][val] = 0;
+        }
+      })
+      console.log({results})
+
+
     // var current = Object.create(this.state);
     // var filteredResults = current.data.datasets.data
     //   Alert(results)
-    //   //this.setState(current)
-    // });
+      //this.setState(current)
+    });
   }
 
 
