@@ -2,7 +2,7 @@ import React from "react";
 import Head from "next/head";
 import NotAuth from "../../layouts/notAuth";
 import {Form, Col, Row, Button} from "react-bootstrap";
-import HttpRequest from '../../helpers/http.helper';
+import {HttpRequest} from '../../helpers/http.helper';
 
 class Login extends React.Component {
     constructor(props) {
@@ -27,8 +27,15 @@ class Login extends React.Component {
         if (form.checkValidity() === true) {
             // Create object from Form Data
             const data = Object.fromEntries(new FormData(form));
-            HttpRequest
-            console.log({data})
+            console.log({data});
+            // Make HTTP request
+            HttpRequest('POST', '/users/sign-up', data)
+                .then(({data}) => {
+                    console.log(data);
+                })
+                .catch(err => {
+                    console.log(err)
+                });
         }
 
         this.setState({
@@ -111,13 +118,11 @@ class Login extends React.Component {
                                 <Form.Row>
                                     <Form.Group as={Row}>
                                         <Col>
-                                            <Form.Label>Gender</Form.Label>
-                                        </Col>
-                                        <Col>
                                             <Form.Check
                                                 type="radio"
                                                 label="Male"
                                                 name="gender"
+                                                value={"Male"}
                                                 required
                                             />
                                         </Col>
@@ -126,6 +131,7 @@ class Login extends React.Component {
                                                 type="radio"
                                                 label="Female"
                                                 name="gender"
+                                                value={"Female"}
                                                 required
                                             />
                                         </Col>
