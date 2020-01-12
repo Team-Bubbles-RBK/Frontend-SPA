@@ -172,7 +172,7 @@ class Login extends React.Component {
                                         </Col>
                                     </Form.Group>
                                 </Form.Row>
-                                <Button type="submit">Submit form</Button>
+                                <Button type="submit" variant={"warning"} size="lg" block>Join</Button>
                             </Form>
                         </div>
                     </div>
