@@ -7,9 +7,25 @@ import Router from "next/router";
 import io from 'socket.io-client';
 import {BubbleRight} from '../components/chat/bubble.right';
 import {BubbleLeft} from '../components/chat/bubble.left';
+
 class Chat extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            messages: [],
+            usermessages: [],
+        };
+        this.sendMessage = this.sendMessage.bind(this);
+    }
+
+    sendMessage(e) {
+        e.preventDefault();
+        const form = e.target;
+        // Get the data from the form
+        const data = Object.fromEntries(new FormData(form));
+        // reset the input field
+        e.target.children[0].value = '';
+        console.log('submit', data);
     }
 
     render() {
@@ -29,10 +45,10 @@ class Chat extends React.Component {
                                          src="https://clarity-enhanced.net/wp-content/themes/clarity-enhanced/assets/img/bootstrap-chat-app-assets/filip.jpg"
                                          alt="Profile img"/>
                                     <span className="settings-tray--right">
-			<i className="material-icons">cached</i>
-			<i className="material-icons">message</i>
-			<i className="material-icons">menu</i>
-		  </span>
+                                        <i className="material-icons">cached</i>
+                                        <i className="material-icons">message</i>
+                                        <i className="material-icons">menu</i>
+		                            </span>
                                 </div>
                                 <div className="search-box">
                                     <div className="input-wrapper">
@@ -131,9 +147,12 @@ class Chat extends React.Component {
                                         <div className="col-12">
                                             <div className="chat-box-tray">
                                                 <i className="material-icons">sentiment_very_satisfied</i>
-                                                <input type="text" placeholder="Type your message here..."/>
-                                                <i className="material-icons">mic</i>
-                                                <i className="material-icons">send</i>
+                                                <form action="#" className="w-100" onSubmit={this.sendMessage}>
+                                                    <input type="text" placeholder="Type your message here..."
+                                                           name="message"/>
+                                                    <i className="material-icons">mic</i>
+                                                    <i className="material-icons" style={{'cursor': 'pointer'}}>send</i>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
