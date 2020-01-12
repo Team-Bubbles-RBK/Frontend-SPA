@@ -60,7 +60,7 @@
     position: absolute;
     top: 0;
     width: 100%;
-    z-index:9999;
+    z-index: 9999;
 }
 
 .footer {
@@ -68,8 +68,3 @@
     /*bottom: 0;*/
     background: #2d3246;
 }
-
-/*.page-transition-enter-done > div {*/
-/*    background: #5812C5;*/
-/*    color:#fff;*/
-/*}*/
