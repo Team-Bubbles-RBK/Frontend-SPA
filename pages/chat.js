@@ -15,6 +15,7 @@ class Chat extends React.Component {
             bubbleId: 2,
             messages: [],
             userMessages: [],
+            lastMessage: ''
         };
         this.sendMessage = this.sendMessage.bind(this);
     }
@@ -24,10 +25,13 @@ class Chat extends React.Component {
         this.socket.emit('join', this.state.bubbleId);
         this.socket.on('message', (message) => {
             console.log(JSON.stringify(message));
-            // let messages =
-            // this.setState({
-            //
-            // })
+            let _messages = this.state.messages.map((msg) => msg)
+            // console.log(this.state.lastMessage, message.content);
+            _messages.push({message: message.content, origin: 'left'});
+            // _messages = _messages.filter(msg => msg.content === this.state.lastMessage);
+            this.setState({
+                messages: _messages
+            })
         });
     }
 
@@ -48,10 +52,13 @@ class Chat extends React.Component {
         HttpRequest('POST', '/messages/store', data)
             .then(({data}) => {
                 let _messages = this.state.messages.map((msg) => msg);
-                _messages.push(message);
-                
+                _messages.pop()
+                // _messages = _messages.filter(msg => msg.content === this.state.lastMessage);
+                _messages.push({message, origin: 'right'});
+
                 this.setState({
-                    messages: _messages
+                    messages: _messages,
+                    lastMessage: message,
                 });
                 console.log({data})
             })
@@ -175,10 +182,12 @@ class Chat extends React.Component {
                                 <div className="chat-panel">
                                     {
                                         this.state.messages.map((msg, i) => {
-                                            return <BubbleRight text={msg} key={i}/>;
+                                            if (msg.origin === 'right') {
+                                                return <BubbleRight text={msg.message} key={i}/>;
+                                            }
+                                            return <BubbleLeft text={msg.message} key={i}/>
                                         })
                                     }
-                                    <BubbleLeft text={'lorem'}/>
                                     <div className="row no-gutters chat-box-tray-wrapper">
                                         <div className="col-12">
                                             <div className="chat-box-tray">
