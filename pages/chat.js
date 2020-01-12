@@ -1,7 +1,7 @@
 import Bubble from "../components/chat components/sideBubbel"
 import UserInfo from "../components/chat components/userInfo"
 import Msg from "../components/msg"
-import {Container, Col, Row, Button} from 'reactstrap';
+import {Container, Col, Row, Button} from 'react-bootstrap';
 import Link from 'next/link'
 // import React from 'react'
 import "./chat.css"

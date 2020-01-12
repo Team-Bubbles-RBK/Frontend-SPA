@@ -1,7 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Input, Button, Form } from "reactstrap";
+import {  Button, Form } from "react-bootstrap";
 import Link from "next/link";
 import Auth from "../layouts/Auth";
 import Axios from "axios";
@@ -64,13 +64,13 @@ class CreateBubble extends React.Component {
             }}
           >
             <label>Bubble's Name:</label>
-            <Input
+            <input
               style={{ width: "50%", marginLeft: "25%" }}
               type="text"
               name="bubble'sName"
               id="bubbleName"
               onChange={e => this.handleChange(e)}
-            ></Input>
+            />
             <br />
             <label>Add Members:</label>
             <Button
