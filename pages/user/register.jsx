@@ -1,8 +1,10 @@
 import React from "react";
 import Head from "next/head";
+import Router from 'next/router';
 import NotAuth from "../../layouts/notAuth";
 import {Form, Col, Row, Button} from "react-bootstrap";
 import {HttpRequest} from '../../helpers/http.helper';
+import AlertDismissibleExample from '../../components/ui/Alert';
 
 class Login extends React.Component {
     constructor(props) {
@@ -14,27 +16,57 @@ class Login extends React.Component {
             hash: null,
             gender: null,
             dob: null,
-            validated: false
+            validated: false,
+            showAlert: false,
+            messageAlert: '',
+            typeAlert: 'info',
+            headerAlert: null
         };
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleSubmit(event) {
         const form = event.currentTarget;
-        event.stopPropagation();
 
+        event.stopPropagation();
         event.preventDefault();
+
         if (form.checkValidity() === true) {
             // Create object from Form Data
             const data = Object.fromEntries(new FormData(form));
-            console.log({data});
+
             // Make HTTP request
             HttpRequest('POST', '/users/sign-up', data)
                 .then(({data}) => {
-                    console.log(data);
+                    // Show alert component @example
+                    this.setState({
+                        showAlert: true,
+                        messageAlert: 'You may login now.',
+                        typeAlert: 'success',
+                        headerAlert: 'Success'
+                    });
+
+                    setTimeout(() => {
+                        this.setState({
+                            showAlert: false
+                        });
+                        Router.push('/user/login');
+                    }, 5999);
+                    // End of alert example
                 })
                 .catch(err => {
-                    console.log(err)
+                    this.setState({
+                        showAlert: true,
+                        messageAlert: 'An error occurred. Try again later.',
+                        typeAlert: 'danger',
+                        headerAlert: 'Error'
+                    });
+
+                    setTimeout(() => {
+                        this.setState({
+                            showAlert: false
+                        });
+                    }, 5999);
                 });
         }
 
@@ -50,6 +82,9 @@ class Login extends React.Component {
                 <Head>
                     <title>Bubbles | Sign Up</title>
                 </Head>
+                {this.state.showAlert ?
+                    <AlertDismissibleExample heading={this.state.headerAlert} msg={this.state.messageAlert}
+                                             type={this.state.typeAlert}/> : ''}
                 <div className="container">
                     <div className="row">
                         <div className="col">
