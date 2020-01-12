@@ -24,8 +24,8 @@ class Chat extends React.Component {
         this.socket = io('http://localhost:3000');
         this.socket.emit('join', this.state.bubbleId);
         this.socket.on('message', (message) => {
-            console.log(JSON.stringify(message));
-            let _messages = this.state.messages.map((msg) => msg)
+            // console.log(JSON.stringify(message));
+            let _messages = this.state.messages.map((msg) => msg);
             // console.log(this.state.lastMessage, message.content);
             _messages.push({message: message.content, origin: 'left'});
             // _messages = _messages.filter(msg => msg.content === this.state.lastMessage);
@@ -63,10 +63,10 @@ class Chat extends React.Component {
                     messages: _messages,
                     lastMessage: message,
                 });
-                console.log({data})
+                // console.log({data})
             })
             .catch(err => {
-                console.error({err})
+                console.error({err});
             })
     }
 

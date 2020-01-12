@@ -19,11 +19,11 @@ export default class Footer extends React.Component {
             .then(({data}) => {
                 // User is authenticated and there are no problems
                 console.log(data)
-                this.state.isLoggedIn = true
+                this.state.isLoggedIn = true;
             })
             .catch(err => {
                 console.log({err});
-                this.state.isLoggedIn = false
+                this.state.isLoggedIn = false;
                 // Router.push('/user/login');
             });
     }
@@ -69,6 +69,8 @@ export default class Footer extends React.Component {
                                 <li><Link href="/"><a>Home</a></Link></li>
                                 {!this.state.isLoggedIn && <li><Link href="/user/login"><a>Login</a></Link></li>}
                                 {!this.state.isLoggedIn && <li><Link href="/user/register"><a>Sign Up</a></Link></li>}
+                                {this.state.isLoggedIn &&
+                                <li><Link href={"/chat"}><a style={{'cursor': 'pointer'}}>Chat</a></Link></li>}
                                 {this.state.isLoggedIn &&
                                 <li><a style={{'cursor': 'pointer'}} onClick={this.logOut}>Logout</a></li>}
                             </ul>

@@ -15,6 +15,19 @@ class Login extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    componentDidMount() {
+        // Validate if user have a valid token
+        let token = typeof window === 'undefined' ? '' : localStorage.getItem('token');
+        HttpRequest('POST', '/users/check', {token})
+            .then(({data}) => {
+                // User is authenticated and there are no problems
+                Router.push('/user/index');
+            })
+            .catch(err => {
+                console.log({err});
+            });
+    }
+
     handleSubmit(event) {
         const form = event.currentTarget;
 
