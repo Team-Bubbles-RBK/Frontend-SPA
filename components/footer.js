@@ -25,7 +25,7 @@ const Footer = () => (
                     </div>
                     <div className="contact-list">
                         <dt>email:</dt>
-                        <dd><a href="mailto:#">dkstudioin@gmail.com</a></dd>
+                        <dd><a href="mailto:#">info@bubble.it</a></dd>
                     </div>
                 </div>
                 <div className="col-md-4 col-xl-3">

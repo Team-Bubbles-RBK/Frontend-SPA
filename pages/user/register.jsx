@@ -1,6 +1,8 @@
 import React from "react";
+import Head from "next/head";
 import NotAuth from "../../layouts/notAuth";
 import {Form, Col, Row, Button} from "react-bootstrap";
+import HttpRequest from '../../helpers/http.helper';
 
 class Login extends React.Component {
     constructor(props) {
@@ -19,19 +21,28 @@ class Login extends React.Component {
 
     handleSubmit(event) {
         const form = event.currentTarget;
-        if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
+        event.stopPropagation();
+
+        event.preventDefault();
+        if (form.checkValidity() === true) {
+            // Create object from Form Data
+            const data = Object.fromEntries(new FormData(form));
+            HttpRequest
+            console.log({data})
         }
 
         this.setState({
             validated: true
         });
+
     };
 
     render() {
         return (
             <NotAuth>
+                <Head>
+                    <title>Bubbles | Sign Up</title>
+                </Head>
                 <div className="container">
                     <div className="row">
                         <div className="col">
@@ -49,6 +60,7 @@ class Login extends React.Component {
                                         <Form.Control
                                             required
                                             type="text"
+                                            name={"first_name"}
                                         />
                                         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                                     </Form.Group>
@@ -57,6 +69,7 @@ class Login extends React.Component {
                                         <Form.Control
                                             required
                                             type="text"
+                                            name={"last_name"}
                                         />
                                         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                                     </Form.Group>
@@ -67,6 +80,7 @@ class Login extends React.Component {
                                         <Form.Control
                                             required
                                             type="email"
+                                            name={"username"}
                                         />
                                         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                                     </Form.Group>
@@ -78,6 +92,7 @@ class Login extends React.Component {
                                             required
                                             type="password"
                                             minLength={8}
+                                            name={"hash"}
                                         />
                                         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                                     </Form.Group>
@@ -88,6 +103,7 @@ class Login extends React.Component {
                                         <Form.Control
                                             required
                                             type="date"
+                                            name={"dob"}
                                         />
                                         <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                                     </Form.Group>
