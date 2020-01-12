@@ -6,7 +6,7 @@ import {Form, Col, Row, Button} from "react-bootstrap";
 import {HttpRequest} from '../../helpers/http.helper';
 import AlertDismissibleExample from '../../components/ui/Alert';
 
-class Login extends React.Component {
+class Register extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -182,4 +182,4 @@ class Login extends React.Component {
     }
 }
 
-export default Login;
+export default Register;
