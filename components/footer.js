@@ -8,7 +8,7 @@ export default class Footer extends React.Component {
         super(props);
         this.state = {
             isLoggedIn: false
-        }
+        };
         this.logOut = this.logOut.bind(this);
     }
 
@@ -69,7 +69,8 @@ export default class Footer extends React.Component {
                                 <li><Link href="/"><a>Home</a></Link></li>
                                 {!this.state.isLoggedIn && <li><Link href="/user/login"><a>Login</a></Link></li>}
                                 {!this.state.isLoggedIn && <li><Link href="/user/register"><a>Sign Up</a></Link></li>}
-                                {this.state.isLoggedIn && <li><a onClick={this.logOut}>Logout</a></li>}
+                                {this.state.isLoggedIn &&
+                                <li><a style={{'cursor': 'pointer'}} onClick={this.logOut}>Logout</a></li>}
                             </ul>
                         </div>
                     </div>
