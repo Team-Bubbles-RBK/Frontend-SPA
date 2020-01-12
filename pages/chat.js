@@ -39,7 +39,10 @@ class Chat extends React.Component {
         e.preventDefault();
         const form = e.target;
         // Get the data from the form
-        const {message} = Object.fromEntries(new FormData(form));
+
+        const formData = {};
+        (new FormData(form)).forEach((val, key) => formData[key] = val);
+        const {message} = formData;
         // reset the input field
         e.target.children[0].value = '';
         console.log('submit', message);
@@ -161,7 +164,7 @@ class Chat extends React.Component {
                                     <span className="time text-muted small">13:21</span>
                                 </div>
                             </div>
-                            <div className="col-md-8">
+                            <div className="col-md-8 scrollable">
                                 <div className="settings-tray">
                                     <div className="friend-drawer no-gutters friend-drawer--grey">
                                         <img className="profile-image"
@@ -188,8 +191,8 @@ class Chat extends React.Component {
                                             return <BubbleLeft text={msg.message} key={i}/>
                                         })
                                     }
-                                    <div className="row no-gutters chat-box-tray-wrapper">
-                                        <div className="col-12">
+                                    <div className="row no-gutters">
+                                        <div className="col-12 chat-box-tray-wrapper">
                                             <div className="chat-box-tray">
                                                 <i className="material-icons">sentiment_very_satisfied</i>
                                                 <form action="#" className="w-100" onSubmit={this.sendMessage}>

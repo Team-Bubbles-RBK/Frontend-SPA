@@ -23,8 +23,9 @@ class Login extends Component {
 
         if (form.checkValidity() === true) {
             // Create object from Form Data
-            const data = Object.fromEntries(new FormData(form));
-
+            // const data = Object.fromEntries(new FormData(form));
+            const data = {};
+            (new FormData(form)).forEach((val, key) => data[key] = val);
             // Make HTTP request
             HttpRequest('POST', '/users/sign-in', data)
                 .then(({data}) => {

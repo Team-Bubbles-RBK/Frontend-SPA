@@ -192,5 +192,10 @@ hr {
 .chat-box-tray-wrapper {
     position: absolute;
     bottom: 0;
-    width: 100%;
+    /*width: 100%;*/
+}
+
+.scrollable {
+    overflow-y: scroll;
+    height: 700px;
 }
