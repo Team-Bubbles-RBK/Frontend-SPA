@@ -7,7 +7,7 @@ if (typeof window !== 'undefined') {
 }
 const headers = {Authorization: `Bearer ${token}`};
 
-export const HttpRequest = (method, endpoint, data) => {
+export const HttpRequest = (method, endpoint, data = null) => {
     return Axios({
         method,
         url: `http://localhost:3000${endpoint}`,
