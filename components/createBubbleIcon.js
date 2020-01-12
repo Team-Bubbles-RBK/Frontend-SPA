@@ -1,6 +1,5 @@
 import React from "react";
 import { Col } from "reactstrap";
-import { MDBIcon } from "mdbreact";
 import createBubble from "../pages/createBubble";
 import Link from "next/link";
 
