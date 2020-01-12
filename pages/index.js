@@ -1,88 +1,51 @@
-import React from 'react'
-import Head from 'next/head'
-import Nav from '../components/nav'
+import React from "react";
+import Head from "next/head";
+import Link from "next/link";
+import Layout from "../layouts/notAuth";
 
 const Home = () => (
-  <div>
-    <Head>
-      <title>Home</title>
-      <link rel="icon" href="/favicon.ico" />
-    </Head>
+    <Layout>
+        <div>
+            <Head>
+                <title>Bubbles | Safe chatting environment</title>
+            </Head>
+            <div className="container-fluid home-main">
+                <h2 className={"display-3"}>Welcome to Bubbles <span className="blinker">॰°ₒ৹๐</span></h2>
+                <Link href="user/register">
+                    <button type="button" className="btn btn-default">Sign Up</button>
+                </Link>
+                <Link href="user/login">
+                    <button type="button" className="btn btn-outline-warning">Login</button>
+                </Link>
+                <div className="text-center mt-3">
+                    <p className={"text-white display-4"}>Create your own <span className={"text-info"}>Bubble</span>.
+                    </p>
+                </div>
+            </div>
+            <div className="container-fluid home-content1">
+                <div className="row">
+                    <div className="col-md-6 content1-left">
+                        <h3>Why to use Bubbles <span className="blinker">?</span></h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt ex inventore iure magni
+                            maxime necessitatibus possimus quibusdam quis repellendus sed tempore, vitae voluptas
+                            voluptatem. Aliquam autem earum expedita laboriosam nesciunt.</p>
+                    </div>
+                    <div className="col-md-6 content1-right">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci est impedit iure molestiae
+                            non placeat quam saepe ut veniam voluptatum. Alias cumque iure modi mollitia nostrum sint
+                            tempora, voluptas voluptate.</p>
+                    </div>
+                </div>
+            </div>
+            <div className="container-fluid home-content2">
+                <p><span>News</span> and <span>announcements</span> for all things <span>Bootstrap</span>, including
+                    new <span>releases</span> and <span>Bootstrap Themes</span>.</p>
+            </div>
+            <style jsx>
+                {``}
+            </style>
+        </div>
+    </Layout>
+);
 
-    <Nav />
-
-    <div className="hero">
-      <h1 className="title">Welcome to Next.js!</h1>
-      <p className="description">
-        To get started, edit <code>pages/index.js</code> and save to reload.
-      </p>
-
-      <div className="row">
-        <a href="https://nextjs.org/docs" className="card">
-          <h3>Documentation &rarr;</h3>
-          <p>Learn more about Next.js in the documentation.</p>
-        </a>
-        <a href="https://nextjs.org/learn" className="card">
-          <h3>Next.js Learn &rarr;</h3>
-          <p>Learn about Next.js by following an interactive tutorial!</p>
-        </a>
-        <a
-          href="https://github.com/zeit/next.js/tree/master/examples"
-          className="card"
-        >
-          <h3>Examples &rarr;</h3>
-          <p>Find other example boilerplates on the Next.js GitHub.</p>
-        </a>
-      </div>
-    </div>
-
-    <style jsx>{`
-      .hero {
-        width: 100%;
-        color: #333;
-      }
-      .title {
-        margin: 0;
-        width: 100%;
-        padding-top: 80px;
-        line-height: 1.15;
-        font-size: 48px;
-      }
-      .title,
-      .description {
-        text-align: center;
-      }
-      .row {
-        max-width: 880px;
-        margin: 80px auto 40px;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-      }
-      .card {
-        padding: 18px 18px 24px;
-        width: 220px;
-        text-align: left;
-        text-decoration: none;
-        color: #434343;
-        border: 1px solid #9b9b9b;
-      }
-      .card:hover {
-        border-color: #067df7;
-      }
-      .card h3 {
-        margin: 0;
-        color: #067df7;
-        font-size: 18px;
-      }
-      .card p {
-        margin: 0;
-        padding: 12px 0 0;
-        font-size: 13px;
-        color: #333;
-      }
-    `}</style>
-  </div>
-)
-
-export default Home
+export default Home;

@@ -1,35 +1,32 @@
-import React from 'react'
-import Link from 'next/link'
-
-const links = [
-  { href: 'https://zeit.co/now', label: 'ZEIT' },
-  { href: 'https://github.com/zeit/next.js', label: 'GitHub' },
-].map(link => {
-  link.key = `nav-link-${link.href}-${link.label}`
-  return link
-})
+import React from "react";
+import Link from "next/link";
 
 const Nav = () => (
-  <nav>
-    <ul>
-      <li>
-        <Link href="/">
-          <a>Home</a>
-        </Link>
-      </li>
-      <li>
-        <Link href="auth/login">
-          <a>Login</a>
-        </Link>
-      </li>
-      {links.map(({ key, href, label }) => (
-        <li key={key}>
-          <a href={href}>{label}</a>
-        </li>
-      ))}
-    </ul>
+    <nav>
+        <ul>
+            <li>
+                <Link href="/">
+                    <a>Home</a>
+                </Link>
+            </li>
+            <li>
+                <Link href="auth/login">
+                    <a>Login</a>
+                </Link>
+            </li>
+            <li>
+                <Link href="auth/register">
+                    <a>register</a>
+                </Link>
+            </li>
+            <li>
+                <Link href="./chat">
+                    <a>chatroom</a>
+                </Link>
+            </li>
+        </ul>
 
-    <style jsx>{`
+        <style jsx>{`
       :global(body) {
         margin: 0;
         font-family: -apple-system, BlinkMacSystemFont, Avenir Next, Avenir,
@@ -37,25 +34,26 @@ const Nav = () => (
       }
       nav {
         text-align: center;
+        justify-content: center;
+        background-color: black;
+        color: orangered;
       }
       ul {
         display: flex;
-        justify-content: space-between;
-      }
-      nav > ul {
-        padding: 4px 16px;
+        justify-content: flex-end;
+        margin:0;
       }
       li {
         display: flex;
-        padding: 6px 8px;
+        margin-right: 5em;
       }
       a {
-        color: #067df7;
         text-decoration: none;
-        font-size: 13px;
+        font-size: 20px;
+        color: orangered;
       }
     `}</style>
-  </nav>
-)
+    </nav>
+);
 
-export default Nav
+export default Nav;
