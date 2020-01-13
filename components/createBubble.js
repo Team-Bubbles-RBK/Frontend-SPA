@@ -1,71 +1,67 @@
 import React from "react";
-import { Button, Form, Card, Accordion } from "react-bootstrap";
+import {Button, Form, Card, Accordion} from "react-bootstrap";
 import Auth from "../layouts/Auth";
 import Axios from "axios";
 
 class CreateBubble extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      bubbleName: ""
-    };
-  }
-
-  handleChange = (e)=>{
-    this.setState({
-      bubbleName: e.target.value
-    });
-  }
-
-  submit = ()=> {
-    if (this.state.bubbleName === "") {
-      alert("You Need to Choose a Name");
-    } else {
-      // Axios.post(" ", (method = "POST"));
-
-      console.log("submit");
-      const form = {
-        bubbleName: this.state.bubbleName
-      };
-      console.log(form);
+    constructor(props) {
+        super(props);
+        this.state = {
+            bubbleName: ""
+        };
     }
-  }
 
-  render() {
-    return (
-      <Accordion>
-          <Card>
-          <Accordion.Toggle as={Card.Header} eventKey="0">
-            Create Bubble
-          </Accordion.Toggle>
-          <Accordion.Collapse eventKey="0">
-            <Card.Body>
-              <Card >
-                <Card.Header>Create your own Bubble </Card.Header>
-                <Card.Body>
-                  <Card.Title>Please enter the name of your Bubble to Generate a link.</Card.Title>
-                  <Card.Text>
-                  Bubble Name: <input/>
-                  </Card.Text>
-                  <Button as="input" type="submit" value="Generate Link" size="lg"  onClick ={this.submit}/>
-                </Card.Body>
-              </Card>
-            </Card.Body>
-          </Accordion.Collapse>
-          </Card>
-        </Accordion>
-    );
-  }
+    handleChange = (e) => {
+        this.setState({
+            bubbleName: e.target.value
+        });
+    }
+
+    submit = () => {
+        if (this.state.bubbleName === "") {
+            alert("You Need to Choose a Name");
+        } else {
+            // Axios.post(" ", (method = "POST"));
+
+            console.log("submit");
+            const form = {
+                bubbleName: this.state.bubbleName
+            };
+            console.log(form);
+        }
+    }
+
+    render() {
+        return (
+            <Accordion>
+                <Card>
+                    <Accordion.Toggle as={Card.Header} eventKey="0">
+                        Create Bubble
+                    </Accordion.Toggle>
+                    <Accordion.Collapse eventKey="0">
+                        <Card.Body>
+                            <Card>
+                                <Card.Header>Create your own Bubble </Card.Header>
+                                <Card.Body>
+                                    <Card.Title>Please enter the name of your Bubble to Generate a link.</Card.Title>
+                                    <Card.Text>
+                                        Bubble Name: <input/>
+                                    </Card.Text>
+                                    <Button as="input" type="submit"
+                                            // value="Generate Link"
+                                            size="lg"
+                                            onClick={this.submit}/>
+                                </Card.Body>
+                            </Card>
+                        </Card.Body>
+                    </Accordion.Collapse>
+                </Card>
+            </Accordion>
+        );
+    }
 }
+
 export default CreateBubble;
-
-
-
-
-
-
-
-
 
 
 // <div
@@ -109,7 +105,6 @@ export default CreateBubble;
 //     </Button>
 //   </Form>
 // </div>
-
 
 
 /////////////////

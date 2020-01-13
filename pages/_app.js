@@ -7,6 +7,13 @@ import {HttpRequest} from "../helpers/http.helper";
 import Router from 'next/router';
 
 export default class MyApp extends App {
+    constructor(props) {
+        super(props);
+        this.state = {
+            loggedIn: false,
+        }
+    }
+
     static async getInitialProps({Component, router, ctx}) {
 
         let pageProps = {};
@@ -15,17 +22,7 @@ export default class MyApp extends App {
             pageProps = await Component.getInitialProps(ctx);
         }
 
-        // Validate if user have a valid token
-        let token = typeof window === 'undefined' ? '' : localStorage.getItem('token');
-        HttpRequest('POST', '/users/check', {token})
-            .then(({data}) => {
-                // User is authenticated and there are no problems
-            })
-            .catch(err => {
-                Router.push('/user/login');
-            });
-
-        return {pageProps}
+        return {pageProps};
     }
 
     render() {
@@ -33,7 +30,7 @@ export default class MyApp extends App {
         return (
             <section>
                 <PageTransition timeout={300} classNames="page-transition">
-                    <Component {...pageProps} key={router.route}/>
+                    <Component {...pageProps} key={router.route} loggedIn={this.state.loggedIn}/>
                 </PageTransition>
                 <style jsx global>{`
           .page-transition-enter {

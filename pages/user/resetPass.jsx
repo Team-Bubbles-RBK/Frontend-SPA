@@ -1,5 +1,5 @@
 import React from 'react';
-import Nav from '../../components/nav';
+import NavOld from '../../components/nav';
 import  NotAuth from "../../layouts/notAuth"
 import {Container, Row, Col, Form,FormGroup, Label,Button,} from 'react-bootstrap';
 import Link from 'next/link'
