@@ -6,7 +6,7 @@ import {Form, Col, Row, Button} from "react-bootstrap";
 import {HttpRequest} from '../../helpers/http.helper';
 import AlertDismissibleExample from '../../components/ui/Alert';
 
-class Login extends React.Component {
+class Register extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -23,6 +23,19 @@ class Login extends React.Component {
             headerAlert: null
         };
         this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    componentDidMount() {
+        // Validate if user have a valid token
+        let token = typeof window === 'undefined' ? '' : localStorage.getItem('token');
+        HttpRequest('POST', '/users/check', {token})
+            .then(({data}) => {
+                // User is authenticated and there are no problems
+                Router.push('/user/index');
+            })
+            .catch(err => {
+                console.log({err});
+            });
     }
 
     handleSubmit(event) {
@@ -182,4 +195,4 @@ class Login extends React.Component {
     }
 }
 
-export default Login;
+export default Register;

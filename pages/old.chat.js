@@ -40,7 +40,7 @@ class OldChat extends React.Component {
         this.socket.emit('join', this.state.bubbleId);
         this.socket.on('message', (message) => {
             alert(JSON.stringify(message));
-        })
+        });
     }
 
     render() {

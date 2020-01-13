@@ -15,6 +15,19 @@ class Login extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    componentDidMount() {
+        // Validate if user have a valid token
+        let token = typeof window === 'undefined' ? '' : localStorage.getItem('token');
+        HttpRequest('POST', '/users/check', {token})
+            .then(({data}) => {
+                // User is authenticated and there are no problems
+                Router.push('/user/index');
+            })
+            .catch(err => {
+                console.log({err});
+            });
+    }
+
     handleSubmit(event) {
         const form = event.currentTarget;
 
@@ -23,8 +36,9 @@ class Login extends Component {
 
         if (form.checkValidity() === true) {
             // Create object from Form Data
-            const data = Object.fromEntries(new FormData(form));
-
+            // const data = Object.fromEntries(new FormData(form));
+            const data = {};
+            (new FormData(form)).forEach((val, key) => data[key] = val);
             // Make HTTP request
             HttpRequest('POST', '/users/sign-in', data)
                 .then(({data}) => {
@@ -54,7 +68,7 @@ class Login extends Component {
                         this.setState({
                             showAlert: false
                         });
-                        // Router.push('/user/login');
+                        Router.push('/user/index');
                     }, 5999);
                     // End of alert
                 })
