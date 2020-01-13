@@ -21,10 +21,17 @@ class Chat extends React.Component {
     }
 
     componentDidMount() {
+        let roomID = new URLSearchParams(location.search).get('room');
+
+        // This breaks the socketid conncetion
+        // this.setState({
+        //     bubbleId: roomID
+        // });
+
         this.socket = io('http://localhost:3000');
         this.socket.emit('join', this.state.bubbleId);
         this.socket.on('message', (message) => {
-            // console.log(JSON.stringify(message));
+            // alert(JSON.stringify(message));
             let _messages = this.state.messages.map((msg) => msg);
             // console.log(this.state.lastMessage, message.content);
             _messages.push({message: message.content, origin: 'left'});
@@ -33,6 +40,14 @@ class Chat extends React.Component {
                 messages: _messages
             })
         });
+
+        HttpRequest('GET', `/bubble/${roomID}`)
+            .then(({data}) => {
+                console.log(data);
+            })
+            .catch(err => {
+                console.log(err);
+            })
     }
 
     sendMessage(e) {

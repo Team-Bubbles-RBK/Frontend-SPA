@@ -11,8 +11,8 @@ class Index extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: '',
-            bubbles:[]
+            username: '',
+            bubbles: []
         };
     }
 
@@ -30,11 +30,10 @@ class Index extends Component {
         HttpRequest('GET', '/users/profile', {token})
             .then(({data}) => {
                 console.log(data);
-                let _b = this.state.bubbles.concat(data.bubbles);
                 this.setState({
-                    user: data,
-                    bubbles: _b
-                })
+                    username: (data.first_name + ' ' + data.last_name),
+                    bubbles: data.bubbles
+                });
             })
             .catch(err => {
                 console.log(err);
@@ -50,7 +49,7 @@ class Index extends Component {
                 </div>
             )
         });
-        let {first_name, last_name} = this.state.user;
+
         return (
             <div>
                 <Auth>
@@ -61,7 +60,7 @@ class Index extends Component {
                     </Head>
                     <Jumbotron fluid className={"mb-0"}>
                         <h1 className="display-4 text-center">
-                            {`${first_name} ${last_name}`}
+                            {this.state.username}
                         </h1>
                         <Container>
                             <CreateBubble/>

@@ -68,7 +68,7 @@ class Login extends Component {
                         this.setState({
                             showAlert: false
                         });
-                        // Router.push('/user/login');
+                        Router.push('/user/index');
                     }, 5999);
                     // End of alert
                 })

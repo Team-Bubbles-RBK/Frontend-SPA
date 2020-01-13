@@ -1,5 +1,6 @@
 import React from "react";
 import {Button, Card} from "react-bootstrap";
+import Link from 'next/router';
 
 class Bubble extends React.Component {
     constructor(props) {
@@ -20,7 +21,8 @@ class Bubble extends React.Component {
                 <Card.Footer>
                     <small className="text-muted">Created on = {created}</small>
                 </Card.Footer>
-                <Button variant="primary" size="lg" active href={'/chat/' + this.props.bubbleId}>
+                <Button variant="primary" size="lg" active
+                        href={'/chat?room=' + this.props.bubbleId}>
                     > Start Bubbling...</Button>
             </Card>
 
