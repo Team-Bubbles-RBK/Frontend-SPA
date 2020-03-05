@@ -85,7 +85,7 @@ const BubbleCard = () => (
 //   var res = await axios.get("/bubbleCard");
 //   const datum = res.data;
 
-//   // props.userId sent from auth
+//   // props.userId sent from user
 //   const result = datum.filter(dat => dat.id === props.userId);
 
 //   return {

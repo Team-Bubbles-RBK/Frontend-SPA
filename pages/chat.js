@@ -1,109 +1,242 @@
-import Bubble from "../components/chat components/sideBubbel"
-import UserInfo from "../components/chat components/userInfo"
-import Msg from "../components/msg"
-import{Container,Col,Row ,Button}  from 'reactstrap'
-import Link from 'next/link'
-import React from 'react'
-import "./chat.css"
-import Auth from "../layouts/Auth"
-class Chat extends React.Component{
-    constructor(props){
-      super(props)
-      this.state={
-        usersArr : [
-          {name:"user 1"},
-          {name:"user 2"},
-          {name:"user 3"},
-          {name:"user 4"},
-          {name:"user 5"},
-          {name:"user 6"},
-          {name:"user 7"},
-          {name:"user 8"},
-        ],
-        seachArr:[],
-        msgArr:["hi","hello","by","suck chat","welcome","bybyby","fuck you","hi","hello","by","suck chat","welcome","bybyby"],
-        myArr:["hi","hello","by","suck chat","welcome","bybyby","fuck you","hi","hello","by","suck chat","welcome","bybyby"]
-        
-        
-        
-      }
-        this.filterList = this.filterList.bind(this)
+import React from 'react';
+import '../public/chat.style.css';
+import Auth from "../layouts/Auth";
+import Head from "next/head";
+import {HttpRequest} from "../helpers/http.helper";
+import Router from "next/router";
+import io from 'socket.io-client';
+import {BubbleRight} from '../components/chat/bubble.right';
+import {BubbleLeft} from '../components/chat/bubble.left';
+
+class Chat extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            bubbleId: 2,
+            messages: [],
+            userMessages: [],
+            lastMessage: ''
+        };
+        this.sendMessage = this.sendMessage.bind(this);
     }
 
-    componentWillMount(){
-      this.setState({
-        seachArr: this.state.usersArr
-      });
+    componentDidMount() {
+        let roomID = new URLSearchParams(location.search).get('room');
+
+        // This breaks the socketid conncetion
+        // this.setState({
+        //     bubbleId: roomID
+        // });
+
+        this.socket = io('http://localhost:3000');
+        this.socket.emit('join', this.state.bubbleId);
+        this.socket.on('message', (message) => {
+            // alert(JSON.stringify(message));
+            let _messages = this.state.messages.map((msg) => msg);
+            // console.log(this.state.lastMessage, message.content);
+            _messages.push({message: message.content, origin: 'left'});
+            // _messages = _messages.filter(msg => msg.content === this.state.lastMessage);
+            this.setState({
+                messages: _messages
+            })
+        });
+
+        HttpRequest('GET', `/bubble/${roomID}`)
+            .then(({data}) => {
+                console.log(data);
+            })
+            .catch(err => {
+                console.log(err);
+            })
     }
-    
-    filterList(e){
-      let updateList = this.state.usersArr;
-      
-      updateList = updateList.filter(item => {
-        return item.name.toLowerCase().search(
-          e.target.value.toLowerCase()
-          ) !== -1;
-        
-      });
-      this.setState({
-        usersArr: updateList
-      });
+
+    sendMessage(e) {
+        e.preventDefault();
+        const form = e.target;
+        // Get the data from the form
+
+        const formData = {};
+        (new FormData(form)).forEach((val, key) => formData[key] = val);
+        const {message} = formData;
+        // reset the input field
+        e.target.children[0].value = '';
+        console.log('submit', message);
+
+        let data = {
+            content: message,
+            bubble_id: this.state.bubbleId,
+        };
+
+        HttpRequest('POST', '/messages/store', data)
+            .then(({data}) => {
+                let _messages = this.state.messages.map((msg) => msg);
+                _messages.pop()
+                // _messages = _messages.filter(msg => msg.content === this.state.lastMessage);
+                _messages.push({message, origin: 'right'});
+
+                this.setState({
+                    messages: _messages,
+                    lastMessage: message,
+                });
+                // console.log({data})
+            })
+            .catch(err => {
+                console.error({err});
+            })
     }
-    componentWillUpdate(){
-      if(this.state.usersArr.length === 0 ){
-        this.setState({usersArr:this.state.seachArr})
-      }
+
+    render() {
+        return (
+            <div>
+                <Auth>
+                    <Head>
+                        <title>Bubbles | {/*this.props.bubble.name*/}</title>
+                        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+                              rel="stylesheet"/>
+                    </Head>
+                    <div className="container-chat">
+                        <div className="row no-gutters">
+                            <div className="col-md-4 border-right">
+                                <div className="settings-tray">
+                                    <img className="profile-image"
+                                         src="https://clarity-enhanced.net/wp-content/themes/clarity-enhanced/assets/img/bootstrap-chat-app-assets/filip.jpg"
+                                         alt="Profile img"/>
+                                    <span className="settings-tray--right">
+                                        <i className="material-icons">cached</i>
+                                        <i className="material-icons">message</i>
+                                        <i className="material-icons">menu</i>
+		                            </span>
+                                </div>
+                                <div className="search-box">
+                                    <div className="input-wrapper">
+                                        <i className="material-icons">search</i>
+                                        <input placeholder="Search here" type="text"/>
+                                    </div>
+                                </div>
+                                <div className="friend-drawer friend-drawer--onhover">
+                                    <img className="profile-image"
+                                         src="https://clarity-enhanced.net/wp-content/themes/clarity-enhanced/assets/img/bootstrap-chat-app-assets/robocop.jpg"
+                                         alt=""/>
+                                    <div className="text">
+                                        <h6>Robo Cop</h6>
+                                        <p className="text-muted">Hey, you're arrested!</p>
+                                    </div>
+                                    <span className="time text-muted small">13:21</span>
+                                </div>
+                                <hr/>
+                                <div className="friend-drawer friend-drawer--onhover">
+                                    <img className="profile-image"
+                                         src="https://clarity-enhanced.net/wp-content/themes/clarity-enhanced/assets/img/bootstrap-chat-app-assets/optimus-prime.jpeg"
+                                         alt=""/>
+                                    <div className="text">
+                                        <h6>Optimus</h6>
+                                        <p className="text-muted">Wanna grab a beer?</p>
+                                    </div>
+                                    <span className="time text-muted small">00:32</span>
+                                </div>
+                                <hr/>
+                                <div className="friend-drawer friend-drawer--onhover ">
+                                    <img className="profile-image"
+                                         src="https://clarity-enhanced.net/wp-content/themes/clarity-enhanced/assets/img/bootstrap-chat-app-assets/real-terminator.png"
+                                         alt=""/>
+                                    <div className="text">
+                                        <h6>Skynet</h6>
+                                        <p className="text-muted">Seen that canned piece of s?</p>
+                                    </div>
+                                    <span className="time text-muted small">13:21</span>
+                                </div>
+                                <hr/>
+                                <div className="friend-drawer friend-drawer--onhover">
+                                    <img className="profile-image"
+                                         src="https://clarity-enhanced.net/wp-content/themes/clarity-enhanced/assets/img/bootstrap-chat-app-assets/termy.jpg"
+                                         alt=""/>
+                                    <div className="text">
+                                        <h6>Termy</h6>
+                                        <p className="text-muted">Im studying spanish...</p>
+                                    </div>
+                                    <span className="time text-muted small">13:21</span>
+                                </div>
+                                <hr/>
+                                <div className="friend-drawer friend-drawer--onhover">
+                                    <img className="profile-image"
+                                         src="https://clarity-enhanced.net/wp-content/themes/clarity-enhanced/assets/img/bootstrap-chat-app-assets/rick.jpg"
+                                         alt=""/>
+                                    <div className="text">
+                                        <h6>Richard</h6>
+                                        <p className="text-muted">I'm not sure...</p>
+                                    </div>
+                                    <span className="time text-muted small">13:21</span>
+                                </div>
+                                <hr/>
+                                <div className="friend-drawer friend-drawer--onhover">
+                                    <img className="profile-image"
+                                         src="https://clarity-enhanced.net/wp-content/themes/clarity-enhanced/assets/img/bootstrap-chat-app-assets/rachel.jpeg"
+                                         alt=""/>
+                                    <div className="text">
+                                        <h6>XXXXX</h6>
+                                        <p className="text-muted">Hi, wanna see something?</p>
+                                    </div>
+                                    <span className="time text-muted small">13:21</span>
+                                </div>
+                            </div>
+                            <div className="col-md-8 scrollable">
+                                <div className="settings-tray">
+                                    <div className="friend-drawer no-gutters friend-drawer--grey">
+                                        <img className="profile-image"
+                                             src="https://clarity-enhanced.net/wp-content/themes/clarity-enhanced/assets/img/bootstrap-chat-app-assets/robocop.jpg"
+                                             alt=""/>
+                                        <div className="text">
+                                            <h6>Robo Cop</h6>
+                                            <p className="text-muted">Layin' down the law since like before
+                                                Christ...</p>
+                                        </div>
+                                        <span className="settings-tray--right">
+			  <i className="material-icons">cached</i>
+			  <i className="material-icons">message</i>
+			  <i className="material-icons">menu</i>
+			</span>
+                                    </div>
+                                </div>
+                                <div className="chat-panel">
+                                    {
+                                        this.state.messages.map((msg, i) => {
+                                            if (msg.origin === 'right') {
+                                                return <BubbleRight text={msg.message} key={i}/>;
+                                            }
+                                            return <BubbleLeft text={msg.message} key={i}/>
+                                        })
+                                    }
+                                    <div className="row no-gutters">
+                                        <div className="col-12 chat-box-tray-wrapper">
+                                            <div className="chat-box-tray">
+                                                <i className="material-icons">sentiment_very_satisfied</i>
+                                                <form action="#" className="w-100" onSubmit={this.sendMessage}>
+                                                    <input type="text" placeholder="Type your message here..."
+                                                           name="message"/>
+                                                    <i className="material-icons">mic</i>
+                                                    <i className="material-icons" style={{'cursor': 'pointer'}}>send</i>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </Auth>
+                <style jsx>
+                    {`
+                    body {
+                        background-color: #3498db;
+                        -webkit-font-smoothing: antialiased;
+                        -moz-osx-font-smoothing: grayscale;
+                        text-rendering: optimizeLegibility;
+                        }`
+                    }
+                </style>
+            </div>
+        );
     }
-  
-    render(){
-      
-      return(
-        <Auth>
-        <Container className="container justify-content-md-center " fluid={true}> 
-         <Row className="row" id="charRow">
-           {/* this one is for the first one where you have the bubbels and user name */}
-            <Col className="col" sm="4" id="col">
-              
-              <UserInfo/>
-        {/* this one for search */}
-              <Col className="search mt-2">
-              <input onChange={this.filterList} class="form-control input-lg mt-2"  type="text" placeholder="search.... "/>
-              <Button variant="info"className="btn ml-2 mt-2 btn-lm" >search</Button>
-              </Col>
-  
-          {/* for the bubble side bar */}
-              <div className='side-bar-bubble mt-5 overflow-auto '>
-                {this.state.usersArr.map(elm=><Bubble name={elm.name}/>)}
-              </div>
-  
-  
-            </Col>
-          {/* this is where the bubbel part end */}
-          {/* for the bubbel on the top of the chat */}
-  
-          {/* for the msgs */}
-            <Col className="col" sm="8">
-              <Bubble name="test bubble"/>       
-               <Col className="side-bar-bubble mt-5 overflow-auto">
-                {this.state.msgArr.map(elm=><Msg msg={elm} name={elm}/>)}
-                {this.state.myArr.map(elm=><div style={{display:"flex",alignItems:"flex-end",flexDirection:"column"}}><Msg msg={elm}/></div>)}
-               
-               </Col>
-              {/* for the chat  */}
-               <div className="search" id="chatBar">
-                 <input class="form-control input-lg mt-2" id="inputlg" type="text" placeholder="search.... "/>
-                 <Button variant="info"className="btn ml-2 mt-2 btn-lm" >send</Button>
-              </div>
-            </Col>   
-  
-            
-      
-        </Row>
-    
-        </Container>
-        </Auth>
-      )
-    }
-  }
-  export default Chat
-  
+}
+
+export default Chat;
